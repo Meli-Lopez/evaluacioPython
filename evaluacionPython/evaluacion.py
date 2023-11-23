@@ -27,26 +27,26 @@ class SistemaVotacion:
                 return False#retorna en falso
         print("El votante no ha sido encontrado en la base de datos")
         return False
-#se define metodo mostrarREsultados
+#se define metodo mostrarResultados
     def mostrarResultados(self):
         print("\nResultados de la votacion:")
-        for candidato, votos in self.candidatos.items():
-            print(f"{candidato}: {votos} votos")
+        for candidato, votos in self.candidatos.items():#itera el nombre del candidato en los votos
+            print(f"{candidato}: {votos} votos")#imprie nombre del candidato y cantidad de los votos
 
-        numMaxVotos = max(self.candidatos.values())
-        ganadores = [candidato for candidato, votos in self.candidatos.items() if votos == numMaxVotos]
+        numMaxVotos = max(self.candidatos.values())#calcula el numero maximo de votos
+        ganadores = [candidato for candidato, votos in self.candidatos.items() if votos == numMaxVotos]#se crea una variable ganadores para que muestre el cambio del candidato que gane
 
-        if len(ganadores) == 1:
-            print(f"\nEl ganador es: {ganadores[0]} con {numMaxVotos} votos.")
+        if len(ganadores) == 1: #se utiliza el metodo len para la longitud de la lista
+            print(f"\nEl ganador es: {ganadores[0]} con {numMaxVotos} votos.")#imprime al ganador de la lista
         else:
-            print("\nEmpate entre los siguientes candidatos:")
+            print("\nEmpate entre los siguientes candidatos:")#en caso de que haya empate imprime los empates y la cantidad  de votos
             for ganador in ganadores:
                 print(f"{ganador} con {numMaxVotos} votos.")
 
-# Función principal
+# se define la funcion principal
 def main():
     sistema = SistemaVotacion()
-
+#se crea el menu con las respectivas opciones 
     while True:
         print("\nMenu de Votacion:")
         print("A. Registrar votante")
@@ -56,26 +56,26 @@ def main():
         print("S. Salir")
 
         opcion = input("Seleccione una opcion: ")
-
+#en caso de que sea a se registra al votante
         if opcion.lower() == "a":
             id = input("Ingrese el numero del ID del votante: ")
             nombre = input("Ingrese el nombre del votante: ")
             sistema.registrarVotante(id, nombre)
-        elif opcion.lower() == "b":
+        elif opcion.lower() == "b":#en caso de que sea b ingresa con el id al sistema
             id = input("Ingrese el ID del votante: ")
-            print("los candidatos son: (Bella,Willi,Rebecca )")
-            candidato = input("Ingrese el nombre del candidato: ")
+            print("los candidatos son: (Bella,Willi,Rebecca )")#despues se muestra el nombre de los candidatos
+            candidato = input("Ingrese el nombre del candidato teniendo en cuenta que los nombres empiezan con letra mayuscula: ")#selecciona uno de los nombres mostrados , 
             sistema.votar(id, candidato)
-        elif opcion.lower() == "c":
+        elif opcion.lower() == "c":#en caso de que sea c votara en blanco
             id = input("Ingrese el numero de ID del votante: ")
             sistema.votar(id, "Voto en blanco")
-        elif opcion.lower()== "d":
-            sistema.mostrarResultados()
-        elif opcion.lower() == "s":
+        elif opcion.lower()== "d":#en caso de sea d se mostrar el resultado de las votaciones
+            sistema.mostrarResultados()#llama al metodo mostrarResultados
+        elif opcion.lower() == "s":#en caso de que sea s se terminara el programa
             print("El programa ha finalizado con exito!!! :D")
             break
-        else:
+        else:#se imprime el mensaje si la opcion seleccionada no esta en el menu
             print("La opcion que selecciono no es valida , selecciona una de las opciones del menu")
 
 if __name__ == "__main__":
-    main();
+    main(); # el main se utiliza para manejar el menu
